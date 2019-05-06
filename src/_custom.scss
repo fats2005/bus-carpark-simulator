@@ -1,0 +1,17 @@
+$primary: #29b6f6;
+$primary-light: #73e8ff;
+$primary-dark: #0086c3;
+$primary-text-color: #000000;
+$secondary: #4a6572;
+$secondary-light: #7793a1;
+$secondary-dark: #203b47;
+$secondary-text-color: #ffffff;
+
+$colors-list: (
+  "primary": $primary,
+  "primary-light": $primary-light,
+  "primary-dark": $primary-dark,
+  "secondary": $secondary,
+  "secondary-light": $secondary-light,
+  "secondary-dark": $secondary-dark
+);

@@ -5,7 +5,7 @@ import Logo from "../../Logo/Logo";
 import NavigationItems from "../NavigationItems/NavigationItems";
 
 const toolbar = props => (
-  <header className={classes.Toolbar}>
+  <header className={classes.Toolbar + " bg-primary"}>
     <div className={classes.Logo}>
       <Logo />
     </div>
