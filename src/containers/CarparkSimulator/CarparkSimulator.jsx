@@ -9,7 +9,10 @@ import classes from "./CarparkSimulator.module.scss";
 
 class CarparkSimulator extends Component {
   state = {
-    modal: false,
+    modal: {
+      report: false,
+      place: false
+    },
     board: {
       rows: 5,
       columns: 5
@@ -19,7 +22,8 @@ class CarparkSimulator extends Component {
       y: null,
       faced: null,
       placed: false
-    }
+    },
+    report: ""
   };
 
   componentDidMount = () => {
@@ -30,16 +34,30 @@ class CarparkSimulator extends Component {
     document.removeEventListener("keydown", this.keyDownHandler);
   }
 
-  openModalHandler = () => {
-    this.setState({ modal: true });
+  openModalHandler = key => {
+    const modal = { ...this.state.modal };
+    modal[key] = true;
+    this.setState({ modal });
   };
 
-  closeModalHandler = () => {
+  closeModalHandler = key => {
+    const modal = { ...this.state.modal };
+    modal[key] = false;
     this.setState({ modal: false });
   };
 
   placeBus = bus => {
-    this.setState({ bus, modal: false });
+    this.setState({ bus });
+    this.closeModalHandler("place");
+  };
+
+  reportHandler = () => {
+    const { bus } = this.state;
+    const report = `The bus is located at [X=${bus.x}] [y=${
+      bus.y
+    }] and looking ${bus.faced}`;
+    this.setState({ report });
+    this.openModalHandler("report");
   };
 
   moveHandler = () => {
@@ -71,26 +89,41 @@ class CarparkSimulator extends Component {
   };
 
   keyDownHandler = event => {
+    if (!this.state.bus.placed) return;
     if (event.keyCode === 38) this.moveHandler();
     if (event.keyCode === 39) this.rotateHandler("RIGHT");
     if (event.keyCode === 37) this.rotateHandler("LEFT");
   };
 
   render() {
-    const { board, bus, modal } = this.state;
+    const { board, bus, modal, report } = this.state;
     return (
       <div
         className={classes.CarparkSimulator}
         onKeyPress={this.keyPressHandler}
       >
-        <Modal show={modal} modalClosed={this.closeModalHandler}>
+        <Modal
+          show={modal.place}
+          modalClosed={() => this.closeModalHandler("place")}
+        >
           <PlaceForm placed={bus => this.placeBus(bus)} />
         </Modal>
+        <Modal
+          show={modal.report}
+          modalClosed={() => this.closeModalHandler("report")}
+        >
+          <p>{report}</p>
+          <button onClick={() => this.closeModalHandler("report")}>
+            Close
+          </button>
+        </Modal>
+
         <CarparkBoard rows={board.rows} columns={board.columns} bus={bus} />
         <CarparkControls
-          openPlace={this.openModalHandler}
-          move={this.moveHandler}
           busPlaced={bus.placed}
+          openPlace={() => this.openModalHandler("place")}
+          move={this.moveHandler}
+          report={this.reportHandler}
           rotateLeft={() => this.rotateHandler("LEFT")}
           rotateRight={() => this.rotateHandler("RIGHT")}
         />

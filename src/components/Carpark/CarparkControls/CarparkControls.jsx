@@ -8,7 +8,10 @@ const carparkControls = props => {
   return (
     <div className={classes.CarparkControls + " bg-secondary-light"}>
       <div className={classes.Buttons}>
-        <button onClick={props.openPlace}>Place</button>
+        <CarparkControl clicked={props.openPlace}>Place</CarparkControl>
+        <CarparkControl clicked={props.report} disabled={!props.busPlaced}>
+          Report
+        </CarparkControl>
       </div>
       <div className={classes.Buttons}>
         <CarparkControl

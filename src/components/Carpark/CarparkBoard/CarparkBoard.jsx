@@ -10,8 +10,6 @@ class CarparkBoard extends Component {
 
     let board = [];
 
-    console.log(bus);
-
     for (let x = 0; x < rows; x++) {
       let children = [];
       for (let y = 0; y < columns; y++) {

@@ -15,7 +15,7 @@ class PlaceForm extends Component {
   handleChange = event => {
     const { id, value } = event.target;
     const bus = { ...this.state.bus };
-    bus[id] = id === "faced" ? id : parseInt(value);
+    bus[id] = id === "faced" ? value : parseInt(value);
     this.setState({ bus });
   };
 
