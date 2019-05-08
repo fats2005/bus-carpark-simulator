@@ -2,19 +2,23 @@ import React, { Component } from "react";
 
 import CarparkBoard from "../../components/Carpark/CarparkBoard/CarparkBoard";
 import CarparkControls from "../../components/Carpark/CarparkControls/CarparkControls";
+import PlaceForm from "../../components/Carpark/PlaceForm/PlaceForm";
+import Modal from "../../components/UI/Modal/Modal";
 
 import classes from "./CarparkSimulator.module.scss";
 
 class CarparkSimulator extends Component {
   state = {
+    modal: false,
     board: {
       rows: 5,
       columns: 5
     },
     bus: {
-      x: 2,
-      y: 2,
-      faced: "EAST"
+      x: null,
+      y: null,
+      faced: null,
+      placed: false
     }
   };
 
@@ -25,6 +29,18 @@ class CarparkSimulator extends Component {
   componentWillUnmount() {
     document.removeEventListener("keydown", this.keyDownHandler);
   }
+
+  openModalHandler = () => {
+    this.setState({ modal: true });
+  };
+
+  closeModalHandler = () => {
+    this.setState({ modal: false });
+  };
+
+  placeBus = bus => {
+    this.setState({ bus, modal: false });
+  };
 
   moveHandler = () => {
     const { rows, columns } = this.state.board;
@@ -61,15 +77,20 @@ class CarparkSimulator extends Component {
   };
 
   render() {
-    const { board, bus } = this.state;
+    const { board, bus, modal } = this.state;
     return (
       <div
         className={classes.CarparkSimulator}
         onKeyPress={this.keyPressHandler}
       >
+        <Modal show={modal} modalClosed={this.closeModalHandler}>
+          <PlaceForm placed={bus => this.placeBus(bus)} />
+        </Modal>
         <CarparkBoard rows={board.rows} columns={board.columns} bus={bus} />
         <CarparkControls
+          openPlace={this.openModalHandler}
           move={this.moveHandler}
+          busPlaced={bus.placed}
           rotateLeft={() => this.rotateHandler("LEFT")}
           rotateRight={() => this.rotateHandler("RIGHT")}
         />

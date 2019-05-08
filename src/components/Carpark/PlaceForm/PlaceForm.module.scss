@@ -1,0 +1,13 @@
+.PlaceForm {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  label {
+    margin: 10px;
+
+    select {
+      margin-left: 10px;
+    }
+  }
+}
