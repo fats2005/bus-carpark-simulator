@@ -24,7 +24,7 @@ class CarparkBoard extends Component {
     }
 
     return (
-      <div className={classes.Carpark}>
+      <div className={classes.Carpark + " bg-secondary-light"}>
         <div className={classes.Board}>{board}</div>
       </div>
     );

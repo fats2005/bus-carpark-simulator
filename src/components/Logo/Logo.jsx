@@ -1,11 +1,12 @@
 import React from "react";
 
-import busLogo from "../../assets/images/bus-logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import classes from "./Logo.module.scss";
 
 const logo = props => (
   <div className={classes.Logo} style={{ height: props.height }}>
-    <img src={busLogo} alt="Bus Logo" />
+    <FontAwesomeIcon icon="bus" size="2x" /> BUS CARPARK SIMULATOR
   </div>
 );
 

@@ -7,7 +7,8 @@ import {
   faArrowCircleDown,
   faArrowCircleRight,
   faHandPointLeft,
-  faHandPointRight
+  faHandPointRight,
+  faBus
 } from "@fortawesome/free-solid-svg-icons";
 
 import Layout from "./components/Layout/Layout";
@@ -19,7 +20,8 @@ library.add(
   faArrowCircleDown,
   faArrowCircleRight,
   faHandPointLeft,
-  faHandPointRight
+  faHandPointRight,
+  faBus
 );
 
 function App() {

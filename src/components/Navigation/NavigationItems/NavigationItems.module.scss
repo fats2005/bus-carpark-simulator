@@ -7,4 +7,30 @@
   height: 100%;
 
   align-items: center;
+  .NavigationItem {
+    margin: 0px;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
+    button {
+      color: white;
+      height: 100%;
+      padding: 16px 10px;
+      border-bottom: 4px solid transparent;
+
+      text-decoration: none;
+      width: 100%;
+      box-sizing: border-box;
+      display: block;
+      &:hover,
+      &:active,
+      &.Active {
+        background-color: #4a6572;
+        border-bottom: 4px solid #29b6f6;
+        color: white;
+      }
+    }
+  }
 }

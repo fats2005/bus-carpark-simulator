@@ -16,6 +16,15 @@ code {
     monospace;
 }
 
+button {
+  background-color: $primary;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  font-family: "Open Sans";
+  color: $primary-text-color;
+}
+
 @each $name, $value in $colors-list {
   .bg-#{$name} {
     background-color: $value;

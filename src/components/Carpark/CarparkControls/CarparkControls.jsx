@@ -8,24 +8,24 @@ const carparkControls = props => {
   const { busPlaced } = props;
   if (!busPlaced) {
     return (
-      <div className={classes.CarparkControls + " bg-secondary-light"}>
+      <div className={classes.CarparkControls + " bg-secondary-dark"}>
         <div className={classes.Buttons}>
           <CarparkControl clicked={() => props.openModal("place")}>
             Place
           </CarparkControl>
           <CarparkControl clicked={() => props.openModal("insert")}>
-            Insert Text
+            Insert Instructions
           </CarparkControl>
         </div>
       </div>
     );
   }
   return (
-    <div className={classes.CarparkControls + " bg-secondary-light"}>
+    <div className={classes.CarparkControls + " bg-secondary-dark"}>
       <div className={classes.Buttons}>
         <CarparkControl clicked={props.openPlace}>Place</CarparkControl>
         <CarparkControl clicked={() => props.openModal("insert")}>
-          Insert Text
+          Insert Instructions
         </CarparkControl>
         <CarparkControl clicked={props.report}>Report</CarparkControl>
       </div>

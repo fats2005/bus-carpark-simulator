@@ -25,7 +25,9 @@ describe("<InsertForm />", () => {
   });
 
   it("should render a submit botton", () => {
-    expect(wrapper.contains(<input type="submit" value="Submit" />)).toBe(true);
+    expect(
+      wrapper.contains(<button type="submit">Run Instructions</button>)
+    ).toBe(true);
   });
 
   it("should trigger handlesubmit", () => {

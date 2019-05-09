@@ -38,7 +38,7 @@ describe("<CarparkSimulator />", () => {
 
   it("should have a initial state for modal havien all the properties falses", () => {
     const modal = wrapper.state("modal");
-    expect(modal).toEqual({ report: false, place: false });
+    expect(modal).toEqual({ report: false, place: false, insert: false });
   });
 
   it("should have a initials state for report having a empty string", () => {
@@ -50,8 +50,8 @@ describe("<CarparkSimulator />", () => {
     expect(wrapper.find(CarparkBoard)).toHaveLength(1);
   });
 
-  it("should render two <Modal /> elements", () => {
-    expect(wrapper.find(Modal)).toHaveLength(2);
+  it("should render three <Modal /> elements", () => {
+    expect(wrapper.find(Modal)).toHaveLength(3);
   });
 
   it("should render a <CarparkControls /> element", () => {

@@ -63,7 +63,7 @@ class PlaceForm extends Component {
             <option value="EAST">EAST</option>
           </select>
         </label>
-        <input type="submit" value="Submit" />
+        <button type="submit">Place</button>
       </form>
     );
   }

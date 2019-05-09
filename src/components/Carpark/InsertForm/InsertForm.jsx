@@ -31,7 +31,7 @@ class InsertForm extends Component {
           />
         </label>
 
-        <input type="submit" value="Submit" />
+        <button type="submit">Run Instructions</button>
       </form>
     );
   }

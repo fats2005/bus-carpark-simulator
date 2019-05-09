@@ -30,7 +30,7 @@ describe("<PlaceForm />", () => {
   });
 
   it("should render a submit botton", () => {
-    expect(wrapper.contains(<input type="submit" value="Submit" />)).toBe(true);
+    expect(wrapper.contains(<button type="submit">Place</button>)).toBe(true);
   });
 
   it("should update bus object with handleChange", () => {

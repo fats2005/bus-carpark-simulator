@@ -14,12 +14,12 @@ describe("<CarparkControls />", () => {
     wrapper = shallow(<CarparkControls />);
   });
 
-  it("should render one <CarparkControl /> element if the bus haven't placed yet", () => {
-    expect(wrapper.find(CarparkControl)).toHaveLength(1);
+  it("should render two <CarparkControl /> element if the bus haven't placed yet", () => {
+    expect(wrapper.find(CarparkControl)).toHaveLength(2);
   });
 
-  it("should render five <CarparkControl /> elements if the bus has placed", () => {
+  it("should render six <CarparkControl /> elements if the bus has placed", () => {
     wrapper.setProps({ busPlaced: true });
-    expect(wrapper.find(CarparkControl)).toHaveLength(5);
+    expect(wrapper.find(CarparkControl)).toHaveLength(6);
   });
 });
