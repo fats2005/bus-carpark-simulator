@@ -2,8 +2,9 @@ import React, { Component } from "react";
 
 import CarparkBoard from "../../components/Carpark/CarparkBoard/CarparkBoard";
 import CarparkControls from "../../components/Carpark/CarparkControls/CarparkControls";
-import PlaceForm from "../../components/Carpark/PlaceForm/PlaceForm";
 import Modal from "../../components/UI/Modal/Modal";
+import PlaceForm from "../../components/Carpark/PlaceForm/PlaceForm";
+import InsertForm from "../../components/Carpark/InsertForm/InsertForm";
 
 import classes from "./CarparkSimulator.module.scss";
 
@@ -11,7 +12,8 @@ class CarparkSimulator extends Component {
   state = {
     modal: {
       report: false,
-      place: false
+      place: false,
+      insert: false
     },
     board: {
       rows: 5,
@@ -49,6 +51,58 @@ class CarparkSimulator extends Component {
   placeBus = bus => {
     this.setState({ bus });
     this.closeModalHandler("place");
+  };
+
+  runInstructions = text => {
+    this.closeModalHandler("insert");
+    const instructions = text.split("\n");
+    const placeInstruction = instructions[0].trim().split(" ");
+
+    let i = 0;
+    let int = setInterval(() => {
+      if (placeInstruction[i] === "PLACE") {
+        const position = placeInstruction[1].split(",");
+        const bus = {
+          x: this.checkPosition(position[0]),
+          y: this.checkPosition(position[1]),
+          faced: this.checkDirection(position[2]),
+          placed: false
+        };
+        this.placeBus(bus);
+      }
+      if (instructions[i].trim() === "MOVE") {
+        this.moveHandler();
+      }
+      if (instructions[i].trim() === "LEFT") {
+        this.rotateHandler("LEFT");
+      }
+      if (instructions[i].trim() === "RIGHT") {
+        this.moveHandler("RIGHT");
+      }
+      if (instructions[i].trim() === "REPORT") {
+        this.reportHandler();
+      }
+
+      i++;
+      if (i === instructions.length) {
+        clearInterval(int);
+        const bus = { ...this.state.bus };
+        bus.placed = true;
+        this.setState({ bus });
+      }
+    }, 1000);
+  };
+
+  checkPosition = n => {
+    const num = parseInt(n);
+    if (num >= 0 && num < 5) return num;
+    return 0;
+  };
+  checkDirection = d => {
+    const direction = d.toUpperCase();
+    if (direction.indexOf(["NORTH", "EAST", "SOUTH", "WEST"]) !== 0)
+      return direction;
+    return "NORTH";
   };
 
   reportHandler = () => {
@@ -109,6 +163,12 @@ class CarparkSimulator extends Component {
           <PlaceForm placed={bus => this.placeBus(bus)} />
         </Modal>
         <Modal
+          show={modal.insert}
+          modalClosed={() => this.closeModalHandler("insert")}
+        >
+          <InsertForm inserted={text => this.runInstructions(text)} />
+        </Modal>
+        <Modal
           show={modal.report}
           modalClosed={() => this.closeModalHandler("report")}
         >
@@ -121,7 +181,7 @@ class CarparkSimulator extends Component {
         <CarparkBoard rows={board.rows} columns={board.columns} bus={bus} />
         <CarparkControls
           busPlaced={bus.placed}
-          openPlace={() => this.openModalHandler("place")}
+          openModal={key => this.openModalHandler(key)}
           move={this.moveHandler}
           report={this.reportHandler}
           rotateLeft={() => this.rotateHandler("LEFT")}

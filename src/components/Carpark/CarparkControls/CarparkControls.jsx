@@ -10,7 +10,12 @@ const carparkControls = props => {
     return (
       <div className={classes.CarparkControls + " bg-secondary-light"}>
         <div className={classes.Buttons}>
-          <CarparkControl clicked={props.openPlace}>Place</CarparkControl>
+          <CarparkControl clicked={() => props.openModal("place")}>
+            Place
+          </CarparkControl>
+          <CarparkControl clicked={() => props.openModal("insert")}>
+            Insert Text
+          </CarparkControl>
         </div>
       </div>
     );
@@ -19,6 +24,9 @@ const carparkControls = props => {
     <div className={classes.CarparkControls + " bg-secondary-light"}>
       <div className={classes.Buttons}>
         <CarparkControl clicked={props.openPlace}>Place</CarparkControl>
+        <CarparkControl clicked={() => props.openModal("insert")}>
+          Insert Text
+        </CarparkControl>
         <CarparkControl clicked={props.report}>Report</CarparkControl>
       </div>
       <div className={classes.Buttons}>
