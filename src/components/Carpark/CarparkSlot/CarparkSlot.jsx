@@ -15,7 +15,7 @@ const carparkSlot = props => {
   if (props.faced === "WEST") icon = "arrow-circle-left";
 
   return (
-    <div className={classes.CarparkSlot}>
+    <div id="carparkSlot" className={classes.CarparkSlot}>
       <FontAwesomeIcon icon={icon} size="3x" />
     </div>
   );

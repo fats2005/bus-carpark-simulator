@@ -43,7 +43,7 @@ class CarparkSimulator extends Component {
   closeModalHandler = key => {
     const modal = { ...this.state.modal };
     modal[key] = false;
-    this.setState({ modal: false });
+    this.setState({ modal });
   };
 
   placeBus = bus => {
@@ -89,7 +89,7 @@ class CarparkSimulator extends Component {
   };
 
   keyDownHandler = event => {
-    if (!this.state.bus.placed) return;
+    if (!this.state.bus.placed) return null;
     if (event.keyCode === 38) this.moveHandler();
     if (event.keyCode === 39) this.rotateHandler("RIGHT");
     if (event.keyCode === 37) this.rotateHandler("LEFT");
